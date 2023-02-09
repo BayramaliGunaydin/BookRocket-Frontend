@@ -1,0 +1,37 @@
+.search-user-main{
+    padding-top: 15vh;
+    padding-bottom: 150px;
+    &-content{
+        .user-search-content{
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-image: url("../img/navbar2.jpg");
+            background-size: cover;
+            padding: 1rem;
+            height: 150px;
+            &-img{  
+                position: relative;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    background-color: white;
+                img{
+                    position:absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    border-radius: 50%;
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+            a{
+                padding-left: 1.5rem;
+                color: white;
+            }
+                
+        }
+    }
+}

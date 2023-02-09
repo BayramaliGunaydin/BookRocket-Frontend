@@ -1,0 +1,33 @@
+@import "navbar";
+@import "home";
+@import "books";
+@import "loginregister";
+@import "footer";
+@import "book_card";
+@import "about";
+@import "profile";
+@import "book_detail";
+@import "bootstrap";
+@import "searchUser";
+
+$gray-color: #a6a6a6;
+body {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
+.btn-outline-red {
+  color: #212529;
+  border: 1px solid #212529;
+}
+
+.btn-outline-red:hover {
+  background-color: #ef2034;
+  color: white;
+  border: 1px solid #ef2034;
+}

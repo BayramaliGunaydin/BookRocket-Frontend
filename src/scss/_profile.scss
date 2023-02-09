@@ -1,0 +1,90 @@
+.user-profile {
+  padding-top: 15vh;
+  padding-bottom: 200px;
+
+  .card {
+    box-shadow: 0px 0px 20px #152450;
+    padding: 2rem;
+    .card-header {
+      background-image: url("../img/navbar2.jpg");
+      background-size: cover;
+      background-position: top;
+      height: 300px;
+      border-radius: 8px;
+      position: relative;
+      .profile-img {
+        background-color: white;
+        padding: 2rem;
+        position: absolute;
+        overflow: hidden;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        img {
+          position: absolute;
+          width: 180px;
+          height: 180px;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      .profile-name {
+        position: absolute;
+        overflow: hidden;
+        color: white;
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        h2 {
+          font-size: 3rem;
+          font-weight: bold;
+        }
+      }
+    }
+    .user-post-list {
+      border: 1px solid gray;
+      border-radius: 8px;
+      padding: 1rem;
+      height: 400px;
+      overflow-y: scroll;
+      &-item {
+        display: flex;
+        align-items: center;
+        img {
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+        }
+        &-details {
+          padding: 0 1rem;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+    .user-like-list {
+      border: 1px solid gray;
+      border-radius: 8px;
+      height: 400px;
+      overflow-y: scroll;
+      &-item {
+        display: flex;
+        align-items: center;
+        img {
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+        }
+        h6 {
+          padding: 0 1rem;
+        }
+      }
+    }
+  }
+}

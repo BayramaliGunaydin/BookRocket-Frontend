@@ -1,0 +1,11 @@
+//Books
+
+.book-main {
+  padding-top: 20vh;
+  padding-bottom: 200px;
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+    }
+  }
+}
