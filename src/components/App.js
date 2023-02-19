@@ -11,6 +11,9 @@ import BookDetail from "./BookDetail/BookDetail";
 import 'semantic-ui-css/semantic.min.css';
 import UserProfile from "./Profile/UserProfile";
 import SearchUser from "./SearchUser/SearchUser";
+import EditorPanel from "./EditorPanel/EditorPanel";
+import Chats from "./Chat/Chats";
+import Chat from "./Chat/Chat";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
         <Route path="/bookdetail/:id" element={<BookDetail />} />
         <Route path="/userprofile/:id" element={<UserProfile />} />
         <Route path="/searchuser" element={<SearchUser/>}/>
+        <Route path="/editorpanel" element={<EditorPanel/>}/>
+        <Route path="/chats/:id" element={<Chats/>}/>
+        <Route path="/chat/:id" element={<Chat/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

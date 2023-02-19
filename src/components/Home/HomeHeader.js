@@ -1,6 +1,9 @@
 import img from "../../img/rocket.png";
+import { Link } from "react-router-dom";
 
 const HomeHeader = () => {
+
+
   return (
     <div className="header">
       <img src={img} className="rocket" alt="" />
@@ -9,11 +12,11 @@ const HomeHeader = () => {
           <div className="home-header-content-inner">
             <h1>Book Rocket'a Hoşgeldin!</h1>
             <p className="lead">
-              Book Rocket'ta yeni bir dünyayı keşfetmeye hazır mısın?
+              Book Rocket'ta kitapların dünyasını keşfetmeye hazır mısın?
             </p>
-            <button className="btn btn-outline-light">
+            <Link to="/hakkimizda"><button className="btn btn-outline-light">
               Daha Fazlasını Öğren
-            </button>
+            </button></Link>
           </div>
         </div>
       </div>

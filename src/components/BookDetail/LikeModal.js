@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
-import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react';
+import React from 'react'
+import { Button, Modal } from 'semantic-ui-react';
 import LikeModalContent from './LikeModalContent';
 
 function LikeModal(props) {
-    const [open,setOpen] = useState(false);
+
+ 
     return (
         <Modal
+        size='tiny'
       onClose={() => props.modalToggle(false)}
       onOpen={() => props.modalToggle(true)}
       open={props.open}
-      trigger={<Button className='like-count'>{props.booklikes.length} beğeni</Button>}
+      trigger={<Button className='like-count'>{props.booklikes?.length} begeni</Button>}
     >
-      <Modal.Header>Bu kitabı beğenenler</Modal.Header>
+      <Modal.Header>Bu kitabı begenenler</Modal.Header>
       {props.booklikes.map((like,index)=><LikeModalContent user={like.user} key={index}/>)}
       <Modal.Actions>
         <Button color='black' onClick={() => props.modalToggle(false)}>

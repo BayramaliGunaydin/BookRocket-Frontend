@@ -1,9 +1,33 @@
 import { NavLink } from "react-router-dom";
 import img from "../../img/Logo.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getSendedFriendRequests, getUserFriendRequests } from "../../actions/AuthActions";
 
 const Navbar = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
+  const user = useSelector(state=>state.auth.user);
+  const dispatch = useDispatch();
+  const not_count= useSelector(state=>state.auth.notification);
+  const token = useSelector(state=>state.auth.token);
+  
+  useEffect(()=>{     
+    if(isLogged){
+      dispatch(getUserFriendRequests(token))
+      dispatch(getSendedFriendRequests(token)); 
+      if(not_count>0){
+        document.querySelector(".profile-notification").classList.add("show");
+      }else{
+        document.querySelector(".profile-notification").classList.remove("show");
+      }
+    }
+  },[not_count,isLogged,dispatch,user?.id,token])
+
+  useEffect(()=>{
+
+  },[user?.role?.rolename])
+
+
   
   const toggleNav = ()=>{
     const navbar = document.querySelector(".navbar-custom");
@@ -29,37 +53,42 @@ const Navbar = () => {
               <li>
                 <NavLink to="/kitaplar">Kitaplar</NavLink>
               </li>
-              {/* <li>
-                <NavLink to="/hakkimizda">Hakkımızda</NavLink>
-              </li> */}
               <li>
                 <NavLink to="/searchuser">Kullanıcı Ara</NavLink>
               </li>
               {isLogged ? (
                 <>
-                  <li>
-                    <button className="btn btn-outline-light">
-                      <NavLink to="/profile">
+                  <li><NavLink to="/profile">
+                    <button className="btn btn-outline-light profile-button">
+                      
                         <i class="fa-solid fa-user"></i> Profil
-                      </NavLink>
-                    </button>
+                      
+                      <span className="profile-notification">{not_count}</span>
+                    </button></NavLink>
                   </li>
+                  {user?.role?.rolename ==="EDITOR"? <li>
+                  <NavLink to="/editorpanel">
+                    <button className="btn btn-outline-light">
+                      <i className="fa-solid fa-book"></i>
+                    </button>
+                  </NavLink>
+                </li> :"" }
                   <li>
                     <NavLink to="/logout">
-                      <i class="fa-solid fa-right-from-bracket"></i>
+                      <i className="fa-solid fa-right-from-bracket"></i>
                     </NavLink>
                   </li>
                 </>
               ) : (
-                <li>
+                <li><NavLink to="/login-register">
                   <button className="btn btn-outline-light">
-                    <NavLink to="/login-register">Üye Ol/Giriş Yap</NavLink>
-                  </button>
+                    Üye Ol/Giriş Yap
+                  </button></NavLink>
                 </li>               
               )}
             </ul>
           </div>
-            <button onClick={toggleNav} className="btn btn-outline-light nav-toggle"><i class="fa-solid fa-bars"></i></button>
+            <button onClick={toggleNav} className="btn btn-outline-light nav-toggle"><i className="fa-solid fa-bars"></i></button>
             
         </div>
       </div>

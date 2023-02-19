@@ -1,6 +1,16 @@
 .about {
   box-shadow: 0px 0px 10px #152450;
-  margin-top: 30vh!important;
+  margin-top: 25vh!important;
+  padding: 1rem!important;
+  ul{
+    .list-group-item{
+      padding: 2rem 1rem;
+    }
+    button{
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
   h2 {
     text-align: center;
   }

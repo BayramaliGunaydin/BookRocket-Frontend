@@ -1,0 +1,296 @@
+
+$dynamic-size:180px;
+
+
+
+.user-profile {
+    padding-top: 15vh;
+    padding-bottom: 200px;
+  
+    .card {
+      box-shadow: 0px 0px 20px #152450;
+      padding: 2rem;
+      .card-header {
+        background-image: url("../img/navbar2.jpg");
+        background-size: cover;
+        background-position: top;
+        height: 350px;
+        border-radius: 8px;
+        position: relative;
+        .profile-img {
+          background-color: white;
+          padding: 2rem;
+          position: absolute;
+          overflow: hidden;
+          width: $dynamic-size+20px;
+          height: $dynamic-size+20px;
+          border-radius: 50%;
+          top: 45%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          img {
+            position: absolute;
+            width: $dynamic-size;
+            height: $dynamic-size;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+          
+        
+        }
+
+        @media (max-width:576px) {
+          $dynamic-size : 100px;
+          .profile-img {           
+            width: $dynamic-size+20px;
+            height: $dynamic-size+20px;
+              .c-user-img-span{
+                  cursor: pointer;
+              }
+              .c-user-img-span::after{
+                  content: "";
+                  width: $dynamic-size;
+                   height: $dynamic-size;
+              }
+            
+            img {
+              width: $dynamic-size;
+              height: $dynamic-size;
+            }
+            
+          
+          }
+          
+        }
+        .profile-name {
+          position: absolute;
+          overflow: hidden;
+          color: white;
+          top: 80%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          h2 {
+            font-size: 2rem;
+            font-weight: bold;
+          }
+        }
+        .profile-socials{
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          .btn{
+            @media (max-width:992px) {
+              span{
+              display: none;
+            }
+            }
+            
+          }
+        }
+        .profile-interaction{
+          position: absolute;
+          width: 100%;
+          display: flex;
+          bottom: 0;
+          button{
+            flex: 50%;
+            color: white;
+            font-size: 1.6rem;
+          }
+        }
+      }
+      @media (max-width:576px) {
+        .card-header{
+          height: 250px;
+        }
+      }
+      .user-post-list {
+        visibility: hidden;
+        width: 100%;
+        border-radius: 8px;
+        max-height: 0px;
+        overflow-y: auto;
+        transition: all 2s;
+        &-item {
+          max-width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 1rem 0;
+          img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+          }
+          @media (max-width:576px) {
+            img{
+              height: 60px;
+              width: 60px;
+              min-width: 60px;
+            }
+          }
+          &-details {
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+      .user-post-list.show{
+        visibility: visible;
+        max-height: 400px;
+      }
+      .user-like-list {
+        visibility: hidden;
+        border-radius: 8px;
+        max-height: 0px;
+        transition: all 2s;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &-item {
+          padding: 1rem 0;
+          display: flex;
+          align-items: center;
+          img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+          }
+          @media (max-width:576px) {
+            img{
+              height: 60px;
+              width: 60px;
+              min-width: 60px;
+            }
+          }
+          h6 {
+            padding: 0 1rem;
+          }
+        }
+      }
+      .user-like-list.show{
+        visibility: visible;
+        max-height: 400px;
+      }
+      
+      .profile-interaction-buttons{    
+        margin-bottom: 2rem;
+        button{
+          position: relative;
+          background-color: white;
+          border: none;
+          padding: 0.5rem 1.5rem;
+          color: gray;
+          span{
+            pointer-events: none;
+          }
+          @media (max-width:576px) {
+            span{
+              display: none;
+            }
+          }
+          i{
+            pointer-events: none;
+          }
+        }
+        button.active{
+          z-index: 1;
+          color:#003A6E;
+          box-shadow: 0 0 20px black;
+          background-color: white;
+        }
+
+      }
+      .profile-interaction-buttons::after{
+        content: "";
+        display: block;
+        background-color: #E2E3E5;
+        height: 2px;
+        width: 100%;
+      }
+    }
+  }
+  
+  .selected-img{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid gray;
+    border-radius: 8px;
+    .arrow{
+        font-size: 10rem;
+    }
+    &-normal{
+        text-align: center;
+    }
+    &-scaled{
+        text-align: center;
+        img{
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;   
+        }
+       
+    }
+  }
+
+  .friend-request-content{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    .image.content{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.5rem 1rem;
+      .friendrequests-modal-img{
+        flex: 10%;
+        img{
+          border-radius: 50%;
+          height: 50px;
+          width: 50px;
+          max-width: fit-content;
+        }
+      }
+      .friendrequests-modal-description{
+        flex: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .friendrequests-modal-header{
+          margin: 0;
+          padding-left: 1rem;
+        }
+      }
+    }
+  }
+  .friend-modal-content{
+    display: flex;
+    &-img{
+      flex: 10%!important;
+      width: auto;
+      img{
+        width: 50px;
+        height: 50px!important;
+        border-radius: 50%;
+      }
+      
+    }
+    &-description{
+      display: flex!important;
+      justify-content: space-between!important;
+      flex: 90%!important;
+      align-items: center;
+      display: flex;
+      &-header{
+        margin: 0!important;
+      }
+    }
+  }

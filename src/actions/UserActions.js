@@ -1,8 +1,10 @@
 import axios from "axios";
 
-export const getCurrentUserPosts = (userid) => (dispatch) => {
+export const getCurrentUserPosts = (userid,token) => (dispatch) => {
   axios
-    .get("http://localhost:9009/userposts/" + userid)
+    .get("http://localhost:9009/userposts/" + userid,{headers:{
+      Authorization: 'Bearer ' + token
+    }})
     .then((res) => {
       dispatch({
         type: "GET_CURRENT_USER_POST_LIST",
@@ -12,9 +14,11 @@ export const getCurrentUserPosts = (userid) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const getCurrentUserLikes = (userid) => (dispatch) => {
+export const getCurrentUserLikes = (userid,token) => (dispatch) => {
   axios
-    .get("http://localhost:9009/userlikes/" + userid)
+    .get("http://localhost:9009/userlikes/" + userid,{headers:{
+      Authorization: 'Bearer ' + token
+    }})
     .then((res) => {
       dispatch({
         type: "GET_CURRENT_USER_LIKE_LIST",
@@ -24,9 +28,11 @@ export const getCurrentUserLikes = (userid) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const getUser = (userid) =>(dispatch)=>{
+export const getUser = (userid,token) =>(dispatch)=>{
   axios
-    .get("http://localhost:9009/user/" + userid)
+    .get("http://localhost:9009/user/" + userid,{headers:{
+      Authorization: 'Bearer ' + token
+    }})
     .then((res) => {
       dispatch({
         type: "GET_USER",
@@ -36,9 +42,11 @@ export const getUser = (userid) =>(dispatch)=>{
 
 }
 
-export const getUserPosts = (userid) => (dispatch) => {
+export const getUserPosts = (userid,token) => (dispatch) => {
   axios
-    .get("http://localhost:9009/userposts/" + userid)
+    .get("http://localhost:9009/userposts/" + userid,{headers:{
+      Authorization: 'Bearer ' + token
+    }})
     .then((res) => {
       dispatch({
         type: "GET_USER_POST_LIST",
@@ -48,9 +56,11 @@ export const getUserPosts = (userid) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const getUserLikes = (userid) => (dispatch) => {
+export const getUserLikes = (userid,token) => (dispatch) => {
   axios
-    .get("http://localhost:9009/userlikes/" + userid)
+    .get("http://localhost:9009/userlikes/" + userid,{headers:{
+      Authorization: 'Bearer ' + token
+    }})
     .then((res) => {
       dispatch({
         type: "GET_USER_LIKE_LIST",
@@ -60,9 +70,20 @@ export const getUserLikes = (userid) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const searchUser = (username) => (dispatch) => {
+export const getUserFriends=(userid,token)=>(dispatch)=>{
   axios
-    .get("http://localhost:9009/searchuser/" + username)
+  .get("http://localhost:9009/getuserfriends/"+userid,{headers:{
+    Authorization: 'Bearer ' + token
+  }})
+  .then(res=>{
+    dispatch({type:"GET_USER_FRIENDS" ,payload:res.data})})
+}
+
+export const searchUser = (username,token) => (dispatch) => {
+  axios
+    .get("http://localhost:9009/searchuser/" + username,{headers:{
+      Authorization: 'Bearer ' + token
+    }})
     .then((res) => {
       dispatch({
         type: "SEARCH_USER",
@@ -71,3 +92,23 @@ export const searchUser = (username) => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const setUserImage= (image,token) => (dispatch) => {
+  axios
+    .put("http://localhost:9009/saveimage",{base64:image},{headers:{
+      Authorization: 'Bearer ' + token
+    }})
+    .then((res) => {
+      dispatch({
+        type: "SET_USER_IMAGE",
+        payload: image,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type:"SET_USER_IMAGE_ERROR",
+        payload:err.response.data
+      })
+    });
+};
+

@@ -1,7 +1,11 @@
 .auth {
-  padding-top: 20vh;
+  padding-top: 15vh;
   height: 700px;
+  .imgg{
+    display: none;
+  }
   .auth-form {
+    padding: 1vh;
     position: absolute;
     top: 200px;
     backface-visibility: hidden;
@@ -59,22 +63,22 @@
     animation-fill-mode: forwards;
   }
   .auth-login.removeLogin {
-    animation: turn1 2s linear;
+    animation: turn1 1s linear;
     animation-fill-mode: forwards;
     z-index: 5;
   }
   .auth-register.showRegister {
-    animation: turn2 2s linear;
+    animation: turn2 1s linear;
     animation-fill-mode: forwards;
     z-index: 10;
   }
   .auth-login.showLogin {
-    animation: turn22 2s linear;
+    animation: turn22 1s linear;
     animation-fill-mode: forwards;
     z-index: 5;
   }
   .auth-register.removeRegister {
-    animation: turn11 2s linear;
+    animation: turn11 1s linear;
     animation-fill-mode: forwards;
     z-index: 10;
   }
@@ -108,4 +112,21 @@
       z-index: 10;
     }
   }
+}
+
+
+@keyframes play-auth {
+  0% { 
+    transform: translate(0,-100%);
+    opacity: 0; 
+  }
+  100%{
+    transform: translate(0,0);
+    opacity: 1; 
+  }
+}
+
+.animation-auth {
+animation: play-auth 1.5s;
+animation-fill-mode: forwards;
 }

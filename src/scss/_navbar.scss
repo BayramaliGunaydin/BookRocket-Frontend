@@ -9,10 +9,10 @@
   background-position: top;
   color: #fff;
   background-attachment: fixed;
-  height: 100px;
+  max-height: 100px;
   width: 100%;
   overflow: hidden;
-  transition: height 2s;
+  transition: max-height 1s;
   .container{
     position: relative;
   }
@@ -47,19 +47,78 @@
           border-bottom: none;
           padding-bottom: none;
         }
+        .profile-button{
+          position: relative;
+          .profile-notification{
+            position: absolute;
+            background-color: white;
+            top: -10px;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+          }
+          .profile-notification.show{
+            position: absolute;
+            background-color: white;
+            top: -10px;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            opacity: 1;
+          }
+        }
+      }
+      &:nth-child(5) {
+        a {
+          color: inherit;
+          &:hover {
+            opacity: inherit;
+          }
+        }
+        a.active {
+          border-bottom: none;
+          padding-bottom: none;
+        }
+        .profile-button{
+          position: relative;
+          .profile-notification{
+            position: absolute;
+            background-color: white;
+            top: -10px;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+          }
+          .profile-notification.show{
+            position: absolute;
+            background-color: white;
+            top: -10px;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            opacity: 1;
+          }
+        }
       }
     }
   }
 }
   @media (max-width:768px) {
+    .navigation{
+      justify-content: center;
+  width: 100%;
+    }
     ul{
-      position: absolute;
       flex-direction: column;
-      top: 80px;
+      padding-top: 2rem;
       justify-content: center!important;
       gap: 2rem;
-      left: 50%;
-      transform: translate(-50%);
     }
     .brand-logo{
       width: 80%;
@@ -86,5 +145,6 @@
 }
 
 .navbar-custom.show{
-  height: 300px;
+  max-height: 330px;
+  overflow: hidden;
 }

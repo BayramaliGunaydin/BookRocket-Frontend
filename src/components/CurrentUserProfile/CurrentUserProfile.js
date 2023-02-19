@@ -1,55 +1,63 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CurrentUserPosts from "./CurrentUserPosts";
 import { getCurrentUserLikes, getCurrentUserPosts} from "../../actions/UserActions";
-import CurrentUserLikes from "./CurrentUserLikes";
+import CurrentUserProfileHeader from "./CurrentUserProfileHeader";
+import CurrentUserProfileBody from "./CurrentUserProfileBody";
+import { resetAuthError, resetPositiveAlert } from "../../actions/AuthActions";
 
 function Profile() {
+  const isLogged = useSelector(state=>state.auth.isLogged)
   const user = useSelector((state) => state.auth.user);
   const userposts = useSelector((state) => state.user.currentUserPosts);
   const userlikes = useSelector((state) => state.user.currentUserLikes);
   const dispatch = useDispatch();
-  console.log(userposts);
-  useEffect(() => {
-    dispatch(getCurrentUserPosts(user.id));
-    dispatch(getCurrentUserLikes(user.id));
-  }, []);
+  const token = useSelector(state=>state.auth.token);
+  const positiveAlert = useSelector(state=>state.auth.positiveAlert)
+  const error = useSelector(state=>state.auth.error)
 
+  useEffect(() => {
+    if(isLogged){
+    dispatch(getCurrentUserPosts(user.id,token));
+    dispatch(getCurrentUserLikes(user.id,token));
+    }
+  }, [user?.id,dispatch,isLogged,token]);
+
+
+  
+
+  useEffect(() => { 
+   let timer
+    if(positiveAlert!==""){      
+    timer = setTimeout(()=>{
+      dispatch(resetPositiveAlert());   
+    },3000) 
+  }
+  return ()=>clearTimeout(timer);
+}, [positiveAlert,dispatch])
+
+  useEffect(() => { 
+     let timer2;
+    if(error!==""){     
+    timer2 = setTimeout(()=>{
+      dispatch(resetAuthError());   
+    },3000)   
+  }
+  return ()=>clearTimeout(timer2);
+}, [error,dispatch])
+ 
   return (
-    <main className="user-profile">
+    <main className="c-user-profile">
       <div className="container">
+      {positiveAlert!==""&&positiveAlert!==undefined?<div class="alert alert-success"   role="alert">
+                         {positiveAlert}
+                      </div>:""}
+      {error!==""&&error!==undefined?<div class="alert alert-danger"   role="alert">
+                         {error}
+                      </div>:""}
         <div className="row">
           <div className="card">
-            <div className="card-header">
-              <div className="profile-img">
-                <img src={`data:image/jpg;base64,` + user.pic} alt="" />
-              </div>
-              <div className="profile-name">
-                <h2>{user.username}</h2>
-              </div>
-            </div>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-10 mx-auto">
-                  <h4 className="p-4 text-center">Yorumlarınız</h4>
-                  <ul class="list-group list-group-flush user-post-list">
-                    <li class="list-group-item"></li>
-                    {userposts?.map((post,index) => {
-                      return <CurrentUserPosts post={post} key={index} />;
-                    })}
-                  </ul>
-                </div>
-                <div className="col-10 mx-auto">
-                  <h4 className="p-4 text-center">Beğendikleriniz</h4>
-                  <ul class="list-group list-group-flush user-like-list">
-                    <li class="list-group-item"></li>
-                    {userlikes?.map((like,index) => {
-                      return <CurrentUserLikes like={like} key={index} />;
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <CurrentUserProfileHeader user={user}/>
+            <CurrentUserProfileBody userposts={userposts} userlikes={userlikes}/>
           </div>
         </div>
       </div>

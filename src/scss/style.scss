@@ -5,10 +5,13 @@
 @import "footer";
 @import "book_card";
 @import "about";
-@import "profile";
+@import "userProfile";
 @import "book_detail";
 @import "bootstrap";
 @import "searchUser";
+@import "currentUserProfile";
+@import "adminPanel";
+@import "chat";
 
 $gray-color: #a6a6a6;
 body {

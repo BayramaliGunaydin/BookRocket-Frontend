@@ -1,68 +1,77 @@
-import React, { useEffect } from 'react'
-import { getUser, getUserLikes, getUserPosts } from '../../actions/UserActions';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import UserPosts from './UserPosts';
-import UserLikes from './UserLikes';
+import React, { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUserLikes, getCurrentUserPosts, getUser} from "../../actions/UserActions";
+import UserProfileHeader from "./UserProfileHeader";
+import UserProfileBody from "./UserProfileBody";
+import { useNavigate, useParams } from "react-router-dom";
+import { getUserFriendRequests, resetAuthError, resetPositiveAlert } from "../../actions/AuthActions";
 
-function UserProfile() {
-    const user = useSelector((state) => state.user.user);
-    const currentUser = useSelector(state=>state.auth.user)
-    const userposts = useSelector((state) => state.user.posts);
-    const userlikes = useSelector((state) => state.user.likes);
-    const navigate = useNavigate();
-    const params = useParams();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        console.log(currentUser.id,currentUser.id)
-        if(params.id==currentUser.id){
-            navigate("/profile");
-        }else{   
-      dispatch(getUser(params.id));
-      dispatch(getUserPosts(params.id));
-      dispatch(getUserLikes(params.id));}
-    }, []);
-  
-    return (
-      <main className="user-profile">
-        <div className="container">
-          <div className="row">
-            <div className="card">
-              <div className="card-header">
-                <div className="profile-img">
-                  <img src={`data:image/jpg;base64,` + user.pic} alt="" />
-                </div>
-                <div className="profile-name">
-                  <h2>{user.username}</h2>
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-10 mx-auto">
-                    <h4 className="p-4 text-center">{user.username} Adlı Kullanıcının Yorumları</h4>
-                    <ul class="list-group list-group-flush user-post-list">
-                      <li class="list-group-item"></li>
-                      {userposts?.map((post,index) => {
-                        return <UserPosts post={post} key={index} />;
-                      })}
-                    </ul>
-                  </div>
-                  <div className="col-10 mx-auto">
-                    <h4 className="p-4 text-center">{user.username} Adlı Kullanıcının Beğendikleri</h4>
-                    <ul class="list-group list-group-flush user-like-list">
-                      <li class="list-group-item"></li>
-                      {userlikes?.map((like,index) => {
-                        return <UserLikes like={like} key={index} />;
-                      })}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+function Profile() {
+  const user = useSelector((state) => state.user.user);
+  const userposts = useSelector((state) => state.user.currentUserPosts);
+  const userlikes = useSelector((state) => state.user.currentUserLikes);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const token = useSelector(state=>state.auth.token);
+  const positiveAlert = useSelector(state=>state.auth.positiveAlert)
+  const error = useSelector(state=>state.auth.error);
+  const cuser = useSelector(state=>state.auth.user);
+  const isLogged = useSelector(state=>state.auth.isLogged)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getUser(params.id,token))
+    if(isLogged){
+      if(cuser.id===params.id){
+        navigate("/profile")
+      }
+      if(user!==undefined){
+        dispatch(getCurrentUserPosts(params.id,token));
+        dispatch(getCurrentUserLikes(params.id,token));
+        dispatch(getUserFriendRequests(token));
+      }
+    }
+  }, [dispatch,params.id,token,cuser,navigate,isLogged]);
+
+ 
+ 
+  useEffect(() => { 
+     let timer
+    if(positiveAlert!==""){      
+    timer = setTimeout(()=>{
+      dispatch(resetPositiveAlert());   
+    },3000)
+    return ()=>clearTimeout(timer);
+  }}, [positiveAlert,dispatch])
+
+  useEffect(() => { 
+     let timer2
+    if(error!==""){
+      
+    timer2 = setTimeout(()=>{
+      dispatch(resetAuthError());     
+    },3000)
+    return ()=>clearTimeout(timer2); 
+  }}, [error,dispatch])
+
+  return (
+    <main className="user-profile">
+      <div className="container">
+        {positiveAlert!==""&&positiveAlert!==undefined?<div class="alert alert-success" role="alert">
+  {positiveAlert}
+</div>:""}
+{error!==""&&error!==undefined?<div class="alert alert-danger" role="alert">
+  {error}
+</div>:""}
+        <div className="row">
+          <div className="card">
+            <UserProfileHeader user={user}/>
+            <UserProfileBody userposts={userposts} userlikes={userlikes}/>
           </div>
         </div>
-      </main>
-    );
+      </div>
+    </main>
+  );
 }
 
-export default UserProfile
+export default Profile;

@@ -1,0 +1,104 @@
+.chats{
+    padding-top: 15vh;
+    padding-bottom: 150px;
+    .card-header{
+        background-image: url("../img/navbar2.jpg");
+        background-size: cover;
+        background-position: top;
+        color:white;
+        h2{
+            margin: 0;
+            padding: 1rem;
+        }
+    }
+    .card-body{
+        padding: 1rem;
+        .chat-list{
+            max-height: 500px;
+            overflow-y: auto;
+            &-item{
+                margin: 0.2rem 0;
+                display: flex;
+                align-items: center;
+                img{
+                    height: 50px;
+                    width: 50px;
+                    min-width: 50px;
+                    border-radius: 50%;
+                }
+                p{
+                    padding-left: 1rem;
+                }
+            }
+            &-item:hover{
+                background-color: gray;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.chat{
+    padding-top: 19vh;
+    padding-bottom: 150px;
+    .card-header{
+        background-image: url("../img/navbar2.jpg");
+        background-size: cover;
+        background-position: top;
+        color:white;
+        h2{
+            padding: 1rem;
+        }
+    }
+    .card-body{
+        overflow-y: auto;
+        height: 400px;
+        display: flex;
+        flex-direction: column-reverse;
+        .chat-messages{
+           display: flex;
+           list-style: none;
+           flex-direction: column;
+           padding: 0;
+           margin: 0;
+           li{
+            flex: 100%;
+            display: flex;
+            padding: 0.5rem;
+            margin: .5rem;
+            height: min-content;
+            .c-user{
+                display: flex;
+                margin-left: auto;
+                width: 100%;
+                flex-wrap: wrap;
+                height: fit-content;
+                span{
+                    display: block;
+                    margin-left: auto;
+                    padding: 0.5rem;
+                    border-radius: 10px;
+                    background-color: #64B6FF;
+                    color: white;
+                    max-width: 45%;
+                    height: fit-content;
+                }
+            }
+            .o-user{
+                max-width: 45%;
+                margin-right: auto;
+                display: flex;
+                flex-wrap: wrap;
+                height: fit-content;
+                span{
+                    height: fit-content;
+                    padding: 0.5rem;
+                    border-radius: 10px;
+                    background-color: #DFDFDF;
+                    max-width: 100%;            
+                }
+            }
+            }
+        }
+    }
+}

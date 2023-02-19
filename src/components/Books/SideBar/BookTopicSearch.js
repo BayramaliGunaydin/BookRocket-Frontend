@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchTopicName } from "../../../actions/BookActions";
 
 function BookTopicSearch() {
   const [topicname, setTopicname] = useState();
   const dispatch = useDispatch();
+  const token = useSelector(state=>state.auth.token);
 
   const onTopicNameChange = (e) => {
     setTopicname(e.target.value);
@@ -12,7 +13,7 @@ function BookTopicSearch() {
 
   const onTopicNameSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchTopicName(topicname));
+    dispatch(searchTopicName(topicname,token));
   };
   return (
     <form action="" onSubmit={onTopicNameSubmit} onChange={onTopicNameChange}>

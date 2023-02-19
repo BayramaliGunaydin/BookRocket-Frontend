@@ -6,10 +6,10 @@ function SendPost(props) {
   const [post, setPost] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const token = useSelector(state=>state.auth.token);
 
 
   const onPostChange = (e) => {
-    console.log(e.target.value)
     setPost(e.target.value);
   };
 
@@ -17,15 +17,13 @@ function SendPost(props) {
      const postText =document.querySelector(".post-text")
      if(post===""){
      postText.value = "";}
-  },[post])
+  },[post,props.error])
 
   const sendPost = (e) => {
     e.preventDefault();
-    let userid =user.id;
     let text = post; 
-    e.target.value = "";   
-    console.log(e.target.value)   
-    dispatch(getSendPost(props.book.id,{userid,text},user));
+    e.target.value = "";     
+    dispatch(getSendPost(props.book?.id,text,user,token));
     setPost("");
   };
 

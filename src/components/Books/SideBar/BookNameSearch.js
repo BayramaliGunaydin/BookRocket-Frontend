@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchBookName } from "../../../actions/BookActions";
 import { useState } from "react";
 
 const BookNameSearch = () => {
   const [bookname, setBookname] = useState();
   const dispatch = useDispatch();
+  const token = useSelector(state=>state.auth.token);
 
   const onBookNameChange = (e) => {
     setBookname(e.target.value);
@@ -12,7 +13,7 @@ const BookNameSearch = () => {
 
   const onBookNameSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchBookName(bookname));
+    dispatch(searchBookName(bookname,token));
   };
 
   return (

@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   currentUserPosts: [],
   currentUserLikes: [],
+  friendList:[],
   books: [],
   user:{},
   posts:[],
@@ -34,6 +35,11 @@ const UserReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         likes: action.payload,
+      };
+      case "GET_USER_FRIENDS":
+      return {
+        ...state,
+        friendList:action.payload,
       };
       case "SEARCH_USER":
         return {

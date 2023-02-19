@@ -3,7 +3,7 @@
     padding-bottom: 150px;
     &-content{
         .user-search-content{
-            margin-top: 2rem;
+            margin-bottom: 2rem;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -27,11 +27,76 @@
                     height: 100px;
                 }
             }
-            a{
+            &-detail{
+                flex: 80%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                a{
                 padding-left: 1.5rem;
                 color: white;
+                 }               
+            }
+            
+            @media (max-width:576px) {
+                &-img{  
+                        width: 70px;
+                        height: 70px;
+                    img{
+                        width: 60px;
+                        height: 60px;
+                    }
+                }
+                &-detail{
+                    .btn{
+                        width: 40px;
+                        span{
+                            display: none;
+                        }
+                    }
+                }
+                
             }
                 
         }
+        .searched-users{
+            height: 0;
+            max-height: 0;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        @keyframes play-search-user {
+            0% { 
+              height: fit-content;
+              max-height: 0;
+              opacity: 0; 
+            }
+            100%{
+              height: fit-content;
+              max-height: 64vh;
+              opacity: 1; 
+            }
+          }
+          
+          .animation-search-user {
+          animation: play-search-user 1s;
+          animation-fill-mode: forwards;
+          }
+
+          @keyframes play-search {
+            0% { 
+              opacity: 0;
+              transform: translate(0,-50%);
+            }
+            100%{
+              transform: translate(0,0);
+              opacity: 1; 
+            }
+          }
+          
+          .animation-search {
+          animation: play-search 1s;
+          animation-fill-mode: forwards;
+          }
     }
 }

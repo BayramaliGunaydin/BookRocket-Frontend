@@ -11,6 +11,22 @@
       padding: 2rem;
       display: flex;
       flex-direction: row;
+      &-img{
+        text-align: center;
+      }
+      &-content{
+        padding: 0 1rem;
+      }
+      @media (max-width:576px) {
+        &-content{
+          padding: 1rem 0;
+        }
+      }
+    }
+    @media (max-width:576px) {
+      &-body{
+        flex-direction: column;
+      }
     }
     &-footer {
       display: flex;
@@ -59,12 +75,12 @@
         }
       }
       &-post {
-        background-color: #f7f7f7;
-        border: none;
+        background-color: #F7F7F7!important;
+        border: none!important;
       }
       &-posts {
-        background-color: #f7f7f7;
-        border: none;
+        background-color: #f7f7f7!important;
+        border: none!important;
         .card {
           padding: 1rem;
           width: 100%;
@@ -83,20 +99,55 @@
         }
       }
     }
+    @media (max-width:576px) {
+      &-footer{
+        padding: 1rem 0!important;
+        &-buttons{
+          padding: 0 1rem;
+        }
+      }
+    }
     .card-footer.show {
       max-height: 1000px;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
 }
 
+@keyframes play-book-detail {
+  0% { 
+    transform: translate(0,-50%);
+    opacity: 0;
+  }
+  100%{
+    transform: translate(0,0); 
+    opacity: 1;
+  }
+}
+
+.animation-book-detail {
+animation: play-book-detail 1.5s;
+animation-fill-mode: forwards;
+}
+
+
 
 .image.content{
+  display: flex;
   align-items: center;
-}
+
 .like-modal-img{
-  width: 50px!important;
-  height: 50px!important;
-  border-radius: 50%!important;
- overflow: hidden;
+  flex: 10%!important;
+  img{
+    height: 50px!important;
+    min-width: 50px;
+    border-radius: 50%!important;
+  }
+}
+
+.like-modal-description{
+  flex: 90%!important;
+  display: flex;
+  overflow: hidden;
+}
 }

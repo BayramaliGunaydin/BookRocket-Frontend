@@ -1,22 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import Book from "./Book";
 import { useEffect } from "react";
-import { getBookList } from "../../actions/BookActions";
+import { getMostLikedBooks } from "../../actions/BookActions";
 
 const BookSection = () => {
-  let bookList = useSelector((state) => state.book.bookList);
+  let mostLikedBooks = useSelector((state) => state.book.mostLikedBooks);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getBookList());
-  }, []);
+    dispatch(getMostLikedBooks());
+  }, [dispatch]);
 
   return (
     <section className="book-section">
       <div className="container">
-        <h2>Tüm Zamanların En Çok Beğeni Alanları</h2>
+        <h2>En Çok Beğeni Alan Kitaplar</h2>
         <div className="row">
-          {bookList?.map((book,index) => {
-            return <Book book={book} key={index} />;
+          {mostLikedBooks?.map((book,index) => {
+            return <Book book={book} key={index} index={index} />;
           })}
         </div>
       </div>

@@ -3,6 +3,35 @@
 .book-main {
   padding-top: 20vh;
   padding-bottom: 200px;
+  &-aside{
+    ul{
+      background-color: #F8F9FA;
+      li{
+        background-color: #F8F9FA;
+      }
+    }
+  }
+  @media (min-width:576px) {
+    @keyframes play-side-bar {
+    0% { 
+      transform: translate(-50%,0);
+      opacity: 0; 
+    }
+    100%{
+      transform: translate(0,0);
+      opacity: 1; 
+    }
+  }
+  
+  .animation-side-bar {
+  animation: play-side-bar 1s;
+  animation-fill-mode: forwards;
+  }
+  }
+  
+
+
+
   @media (max-width: 768px) {
     .container {
       width: 100%;

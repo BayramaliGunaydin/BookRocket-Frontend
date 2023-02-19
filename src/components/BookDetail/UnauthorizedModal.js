@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Modal,Button,Header,Image } from 'semantic-ui-react'
+import { Modal,Button} from 'semantic-ui-react'
 
 function UnauthorizedModal(props) {
   const navigate = useNavigate()

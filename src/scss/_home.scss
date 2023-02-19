@@ -48,7 +48,7 @@
   }
 
   .book-section {
-    margin-top: 20vh;
+    margin-top: 15vh;
   }
 }
 
@@ -67,11 +67,21 @@
   .rocket{
     width: 10rem;
     position: absolute;
-    left: -5px;
-    animation: rocket 5s;
+    left: -30px;
+    animation: rocket 4s;
     transition: all 10s;
     z-index: 5;
     padding-top: 46vh;
+  }
+  
+}
+
+@media (max-width:992px) {
+  .rocket{
+    position: absolute;
+    animation: rocket 5.8s;
+    transition: all 10s;
+    z-index: 5;
   }
   
 }

@@ -3,6 +3,11 @@ import BookSection from "./BookSection";
 import BookSection2 from "./BookSection2";
 
 const Home = () => {
+
+
+
+
+
   return (
     <main className="home-main">
       <HomeHeader />
